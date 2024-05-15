@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { InputBox } from "./components";
 import useCurrencyInfo from "./hooks/useCurrencyInfo";
+import toast, { Toaster } from "react-hot-toast";
 
 function App() {
   const [amount, setAmount] = useState(0);
   const [from, setFrom] = useState("usd");
   const [to, setTo] = useState("inr");
   const [convertedAmount, setConvertedAmount] = useState(0);
+  const notify = () => toast.error("API is not working currently!");
 
   const currencyInfo = useCurrencyInfo(from);
 
@@ -35,6 +37,7 @@ function App() {
             onSubmit={(e) => {
               e.preventDefault();
               convert();
+              notify();
             }}
           >
             <div className="w-full mb-1">
@@ -76,6 +79,7 @@ function App() {
           </form>
         </div>
       </div>
+      <Toaster position="top-left" />
     </div>
   );
 }
